@@ -1,3 +1,4 @@
 ﻿  LearningProjects.cpp
-d:\source\repos\learningprojects\learningprojects\learningprojects.cpp(141): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\LearningProjects.cpp(168): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\LearningProjects.cpp(188): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
   LearningProjects.vcxproj -> D:\source\repos\LearningProjects\Debug\LearningProjects.exe

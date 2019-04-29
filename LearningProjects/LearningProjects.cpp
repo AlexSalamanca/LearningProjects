@@ -3,31 +3,53 @@
 
 #include "pch.h"
 #include <iostream>
+#include <math.h>
 #include <vector>
+#include <limits>
+#include <iomanip>
+#include <algorithm>
 
+#define __DBL_MAX std::numeric_limits<double>::max()
+
+struct Point {
+	int x, y;
+	double Distance(const Point& b) const {
+		return std::sqrt((x - b.x) * (x - b.x) + (y - b.y) * (y - b.y));
+	}
+};
+
+typedef std::vector<Point> Points;
+
+//TODO Create classes for each group of problemsI finish.
 void CollatzConjecture();
 std::vector<int> MergeSort(std::vector<int>, int);
 int* Merge(std::vector<int>, int, std::vector<int>, int);
 std::vector<int> BubbleSort(std::vector<int>);
 std::vector<int> GetArray();
 void PrintArray(std::vector<int>);
+float ClosestPair(Points &points_array);
+double SmallestDistance(const Points& point_array, double min);
+double DivideConquer(const Points& point_array);
+Points GetPointArray();
+
 
 int main()
 {
 	int choice = 0;
-	const int max_choice = 3;
+	const int max_choice = 4;
 
 	while (choice <= max_choice) {
 		std::cout << "Introduce a number to choose one the the problems." << std::endl;
 		std::cout << "1. Collatz Conjecture." << std::endl;
 		std::cout << "2. Merge Sort." << std::endl;
 		std::cout << "3. Bubble Sort." << std::endl;
+		std::cout << "4. Closest Pair Problem." << std::endl;
 		std::cin >> choice;
 	
 		switch (choice) {
 		case 1:
-CollatzConjecture();
-break;
+			CollatzConjecture();
+			break;
 		case 2: {
 			std::vector<int> unordered_array = GetArray();
 			std::vector<int> ordered_array = MergeSort(unordered_array, unordered_array.size());
@@ -38,6 +60,11 @@ break;
 			std::vector<int> unordered_array = GetArray();
 			std::vector<int> ordered_array = BubbleSort(unordered_array);
 			PrintArray(ordered_array);
+			break;
+		}
+		case 4: {
+			Points point_array = GetPointArray();
+			std::cout << "Smallest Distance = " << ClosestPair(point_array) << std::endl;
 			break;
 		}
 		default:
@@ -141,4 +168,53 @@ void PrintArray(std::vector<int>ordered_array) {
 	for (int i = 0; i < ordered_array.size(); i++) std::cout << ordered_array[i] << " ";
 
 	std::cout << std::endl;
+}
+
+Points GetPointArray() {
+	Point point_value;
+	Points point_array;
+	std::cout << "Introduce six pairs of points(ex. 2 6)" << std::endl;
+	for (int i = 0; i < 6; i++) {
+		std::cin >> point_value.x >> point_value.y;
+		point_array.push_back(point_value);
+	}
+
+	return point_array;
+}
+
+float ClosestPair(Points &point_array) {
+	std::sort(point_array.begin(), point_array.end(), [](const Point & a, const Point & b) {return (a.x == b.x) ? (a.y < b.y) : (a.x < b.x); });
+
+	return DivideConquer(point_array);
+}
+
+double SmallestDistance(const Points& point_array, double min = __DBL_MAX) {
+	for (auto it1 = point_array.begin(); it1 != point_array.end(); ++it1)
+		for (auto it2 = it1 + 1; it2 != point_array.end() && std::abs(it2->y - it1->y) < min; ++it2)
+			min = std::min(it1->Distance(*it2), min);
+
+	return min;
+}
+
+double DivideConquer(const Points& point_array) {
+	if (point_array.size() <= 3) return SmallestDistance(point_array);
+
+	size_t mid = point_array.size() / 2;
+
+	Points left_array(point_array.begin(), point_array.begin() + mid);
+	Points right_array(point_array.begin() + mid, point_array.end());
+
+	double left_index = DivideConquer(left_array);
+	double right_index = DivideConquer(right_array);
+	double smallest_distance = std::min(left_index, right_index);
+
+	Points strip;
+	const Point& mid_point = point_array[mid];
+
+	for (auto point : point_array)
+		if (std::abs(mid_point.x - point.x) < smallest_distance) strip.push_back(point);
+
+	std::sort(strip.begin(), strip.end(), [](const Point & a, const Point & b) {return (a.y == b.y) ? (a.x < b.x) : (a.y < b.y); });
+
+	return std::min(smallest_distance, SmallestDistance(strip, smallest_distance));
 }
