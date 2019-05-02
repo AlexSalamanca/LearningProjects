@@ -1,4 +1,13 @@
-﻿  LearningProjects.cpp
-D:\source\repos\LearningProjects\LearningProjects\LearningProjects.cpp(168): warning C4018: '<': signed/unsigned mismatch
-D:\source\repos\LearningProjects\LearningProjects\LearningProjects.cpp(188): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+﻿  ClassicAlgorithm.cpp
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(64): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(71): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(87): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(92): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(93): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(109): warning C4018: '<': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(131): warning C4244: 'return': conversion from 'double' to 'float', possible loss of data
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(171): warning C4018: '<=': signed/unsigned mismatch
+D:\source\repos\LearningProjects\LearningProjects\ClassicAlgorithm.cpp(187): warning C4018: '<': signed/unsigned mismatch
+  LearningProjects.cpp
+  Generating Code...
   LearningProjects.vcxproj -> D:\source\repos\LearningProjects\Debug\LearningProjects.exe
